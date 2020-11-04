@@ -4,10 +4,10 @@ const path = require('path');
 
 const usersPath = path.join(__dirname, '../data/users.json');
 
-users.get('/users', (req, res) => {
+users.get('/', (req, res) => {
   fs.readFile(usersPath, { encoding: 'utf8' }, (err, data) => {
     if (err) {
-      console.log(err);
+      res.status(500).send({ message: 'Ошибка загрузки пользователей' });
       return;
     }
     const usersList = JSON.parse(data);
@@ -15,10 +15,10 @@ users.get('/users', (req, res) => {
   });
 });
 
-users.get('/users/:_id', (req, res) => {
+users.get('/:_id', (req, res) => {
   fs.readFile(usersPath, { encoding: 'utf8' }, (err, data) => {
     if (err) {
-      console.log(err);
+      res.status(500).send({ message: 'Ошибка загрузки пользоватлей' });
       return;
     }
     const usersList = JSON.parse(data);

@@ -7,7 +7,7 @@ const cardsPath = path.join(__dirname, '../data/cards.json');
 cards.get('/', (req, res) => {
   fs.readFile(cardsPath, { encoding: 'utf8' }, (err, data) => {
     if (err) {
-      console.log(err);
+      res.status(500).send({ message: 'Ошибка загрузки карточек' });
       return;
     }
     const cardList = JSON.parse(data);
