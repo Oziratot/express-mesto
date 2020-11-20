@@ -9,6 +9,7 @@ module.exports.getUsers = (req, res) => {
 
 module.exports.getUser = (req, res) => {
   User.findById(req.params._id)
+    .orFail(new Error('Пользователь не найден'))
     .then((user) => res.send({ data: user }))
     .catch((err) => errorOutput(err, res));
 };
@@ -26,6 +27,7 @@ module.exports.updateUserInfo = (req, res) => {
     new: true,
     runValidators: true,
   })
+    .orFail(new Error('Пользователь не найден'))
     .then((user) => res.send({ data: user }))
     .catch((err) => errorOutput(err, res));
 };
@@ -36,6 +38,7 @@ module.exports.updateAvatar = (req, res) => {
     new: true,
     runValidators: true,
   })
+    .orFail(new Error('Пользователь не найден'))
     .then((user) => res.send({ data: user }))
     .catch((err) => errorOutput(err, res));
 };
